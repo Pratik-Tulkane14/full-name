@@ -2,13 +2,21 @@ import { useState } from "react";
 import "./App.css";
 
 function App() {
-  const [firstName, setFirstName] = useState(null);
-  const [lastName, setLastName] = useState(null);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [isFullNameVisible, setIsFullNameVisible] = useState(false);
+
+  const isValidName = (name) => /^[a-zA-Z\s]+$/.test(name);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    setIsFullNameVisible(true);
+    if (isValidName(firstName) && isValidName(lastName)) {
+      setIsFullNameVisible(true);
+    } else {
+      alert("Please enter a valid name with alphabetic characters only.");
+    }
   };
+
   return (
     <div className="wrapper">
       <form onSubmit={handleSubmit}>
@@ -21,7 +29,7 @@ function App() {
             required
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
-          ></input>
+          />
         </div>
         <div>
           <label htmlFor="lastName">Last Name:</label>
@@ -31,7 +39,7 @@ function App() {
             required
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
-          ></input>
+          />
         </div>
 
         <button type="submit">Submit</button>
@@ -39,7 +47,7 @@ function App() {
 
       {isFullNameVisible && (
         <p>
-          Full Name:{firstName} {lastName}
+          Full Name: {firstName} {lastName}
         </p>
       )}
     </div>
