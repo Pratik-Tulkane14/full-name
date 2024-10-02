@@ -2,8 +2,8 @@ import { useState } from "react";
 import "./App.css";
 
 function App() {
-  const [firstName, setFirstName] = useState(null);
-  const [lastName, setLastName] = useState(null);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [isFullNameVisible, setIsFullNameVisible] = useState(false);
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -39,7 +39,7 @@ function App() {
 
       {isFullNameVisible && (
         <p>
-          Full Name:{firstName} {lastName}
+          Full Name: {firstName} {lastName}
         </p>
       )}
     </div>
